@@ -3,7 +3,7 @@ import json
 from models.Teacher import Teacher
 
 
-def fetch_teacher_schedule() -> str:
+def fetch_teacher_schedule() -> [str, None]:
     response = requests.get("https://api.example.com/teacher/schedule")
 
     if response.status_code == 200:
