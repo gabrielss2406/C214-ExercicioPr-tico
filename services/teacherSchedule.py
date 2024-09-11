@@ -1,19 +1,15 @@
+import requests
 import json
-
 from models.Teacher import Teacher
 
 
 def fetch_teacher_schedule() -> str:
-    response = """
-    {
-        "nomeDoProfessor": "Jane Doe",
-        "horarioDeAtendimento": "10:00 - 12:00",
-        "periodo": "afternoon",
-        "sala": "102",
-        "predio": ["1"]
-    }
-    """
-    return response
+    response = requests.get("https://api.example.com/teacher/schedule")
+
+    if response.status_code == 200:
+        return response.text
+    else:
+        return None
 
 
 def create_teacher_from_json(json_string: str) -> Teacher:
