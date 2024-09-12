@@ -61,7 +61,7 @@ class TestTeacherSchedule(unittest.TestCase):
     def test_teachers_building_range(self):
         teacher = create_teacher_from_json(self.mock_json)
 
-        self.assertTrue(1 <= teacher.building[0] <= 6, "Os prédios disponíveis 1 até 6")
+        self.assertTrue(1 <= int(teacher.building[0]) <= 6, "Os prédios disponíveis 1 até 6")
 
     def test_teachers_room_range(self):
         teacher = create_teacher_from_json(self.mock_json)
@@ -76,7 +76,7 @@ class TestTeacherSchedule(unittest.TestCase):
         for i in range(len(rooms)):
             if teacher.room == rooms[i]:
                 self.assertTrue(
-                    5 * i + 1 <= teacher.building[0] <= 5 * (i + 1),
+                    5 * i + 1 <= int(teacher.building[0]) <= 5 * (i + 1),
                     "A sala do professor não bate com o prédio estabelecido"
                 )
 
