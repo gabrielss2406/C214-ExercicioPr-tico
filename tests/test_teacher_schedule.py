@@ -80,12 +80,12 @@ class TestTeacherSchedule(unittest.TestCase):
     def test_teachers_room_and_building_logic(self):
         teacher = create_teacher_from_json(self.mock_json)
 
-        rooms = ["1", "2", "3", "4", "5", "6"]
+        buildings = ["1", "2", "3", "4", "5", "6"]
 
-        for i in range(len(rooms)):
-            if teacher.room == rooms[i]:
+        for i in range(len(buildings)):
+            if teacher.building[0] == buildings[i]:
                 self.assertTrue(
-                    5 * i + 1 <= int(teacher.building[0]) <= 5 * (i + 1),
+                    5 * i + 1 <= int(teacher.room) <= 5 * (i + 1),
                     "A sala do professor não bate com o prédio estabelecido"
                 )
 
