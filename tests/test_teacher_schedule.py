@@ -99,7 +99,7 @@ class TestTeacherSchedule(unittest.TestCase):
             if teacher.building[0] == buildings[i]:
                 self.assertTrue(
                     5 * i + 1 <= int(teacher.room) <= 5 * (i + 1),
-                    "A sala do professor não bate com o prédio estabelecido"
+                    f"A sala {teacher.room} não faz parte do prédio {teacher.building[0]}"
                 )
 
         # if 1 <= int(teacher.room) <= 5:
