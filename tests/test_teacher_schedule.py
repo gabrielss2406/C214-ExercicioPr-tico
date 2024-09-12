@@ -10,7 +10,7 @@ class TestTeacherSchedule(unittest.TestCase):
             "nomeDoProfessor": "John Doe",
             "horarioDeAtendimento": "09:00 - 12:00",
             "periodo": "morning",
-            "sala": "101",
+            "sala": "1",
             "predio": ["1"]
         }
         """
@@ -48,7 +48,7 @@ class TestTeacherSchedule(unittest.TestCase):
         self.assertEqual(
             teacher.period, "morning", "O período do professor está incorreto"
         )
-        self.assertEqual(teacher.room, "101", "A sala do professor está incorreta")
+        self.assertEqual(teacher.room, "1", "A sala do professor está incorreta")
         self.assertEqual(
             teacher.building, ["1"], "O prédio do professor está incorreto"
         )
@@ -56,17 +56,26 @@ class TestTeacherSchedule(unittest.TestCase):
     def test_teachers_building_array_size(self):
         teacher = create_teacher_from_json(self.mock_json)
 
-        self.assertEqual(len(teacher.building), 1, "Um professor pode trabalhar em apenas um prédio")
+        self.assertEqual(
+            len(teacher.building), 1,
+            "Um professor pode trabalhar em apenas um prédio"
+        )
 
     def test_teachers_building_range(self):
         teacher = create_teacher_from_json(self.mock_json)
 
-        self.assertTrue(1 <= int(teacher.building[0]) <= 6, "Os prédios disponíveis 1 até 6")
+        self.assertTrue(
+            1 <= int(teacher.building[0]) <= 6,
+            f"O prédio {teacher.building[0]} está fora da faixa 1 até 6 de prédios disponíveis"
+        )
 
     def test_teachers_room_range(self):
         teacher = create_teacher_from_json(self.mock_json)
 
-        self.assertTrue(1 <= int(teacher.room) <= 30, "As salas disponíveis são de 1 até 30")
+        self.assertTrue(
+            1 <= int(teacher.room) <= 30,
+            f"A sala {int(teacher.room)} está fora da faixa de 1 até 30 de salas disponíveis"
+        )
 
     def test_teachers_room_and_building_logic(self):
         teacher = create_teacher_from_json(self.mock_json)
