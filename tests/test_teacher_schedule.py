@@ -52,3 +52,43 @@ class TestTeacherSchedule(unittest.TestCase):
         self.assertEqual(
             teacher.building, ["1"], "O prédio do professor está incorreto"
         )
+
+    def test_teachers_building_array_size(self):
+        teacher = create_teacher_from_json(self.mock_json)
+
+        self.assertEqual(len(teacher.building), 1, "Um professor pode trabalhar em apenas um prédio")
+
+    def test_teachers_building_range(self):
+        teacher = create_teacher_from_json(self.mock_json)
+
+        self.assertTrue(1 <= teacher.building[0] <= 6, "Os prédios disponíveis 1 até 6")
+
+    def test_teachers_room_range(self):
+        teacher = create_teacher_from_json(self.mock_json)
+
+        self.assertTrue(1 <= int(teacher.room) <= 30, "As salas disponíveis são de 1 até 30")
+
+    def test_teachers_room_and_building_logic(self):
+        teacher = create_teacher_from_json(self.mock_json)
+
+        rooms = ["1", "2", "3", "4", "5", "6"]
+
+        for i in range(len(rooms)):
+            if teacher.room == rooms[i]:
+                self.assertTrue(
+                    5 * i + 1 <= teacher.building[0] <= 5 * (i + 1),
+                    "A sala do professor não bate com o prédio estabelecido"
+                )
+
+        # if 1 <= int(teacher.room) <= 5:
+        #     self.assertEqual(teacher.building[0], "1")
+        # elif 6 <= int(teacher.room) <= 10:
+        #     self.assertEqual(teacher.building[0], "2")
+        # elif 11 <= int(teacher.room) <= 15:
+        #     self.assertEqual(teacher.building[0], "3")
+        # elif 16 <= int(teacher.room) <= 20:
+        #     self.assertEqual(teacher.building[0], "4")
+        # elif 21 <= int(teacher.room) <= 25:
+        #     self.assertEqual(teacher.building[0], "5")
+        # elif 26 <= int(teacher.room) <= 30:
+        #     self.assertEqual(teacher.building[0], "6")
