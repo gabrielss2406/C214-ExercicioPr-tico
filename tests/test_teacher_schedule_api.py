@@ -16,9 +16,9 @@ class TestTeacherSchedule(unittest.TestCase):
         # Simulando o retorno da API com sucesso (status 200)
         mock_get.return_value.status_code = 200
 
-        self.assertIsNotNone(
-            self.service, "A função não deve retornar None para status 200"
-        )
+        result = self.service.fetch_teacher_schedule()
+
+        self.assertIsNotNone(result, "A função não deve retornar None para status 200")
 
     @patch("services.teacherSchedule.requests.get")
     def test_fetch_teacher_schedule_failure(self, mock_get):
@@ -28,3 +28,12 @@ class TestTeacherSchedule(unittest.TestCase):
         result = self.service.fetch_teacher_schedule()
 
         self.assertIsNone(result, "A função deve retornar None para status 404")
+
+    @patch("services.teacherSchedule.requests.get")
+    def test_fetch_teacher_schedule_failure_error(self, mock_get):
+        # Simulando uma falha na API (status 404)
+        mock_get.return_value.status_code = 500
+
+        result = self.service.fetch_teacher_schedule()
+
+        self.assertIsNone(result, "A função deve retornar None para status 500")

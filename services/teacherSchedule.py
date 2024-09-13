@@ -35,4 +35,4 @@ class TeacherScheduleService:
         )
 
     def assign_building(self, room: str, build: str):
-        return 5 * build + 1 <= int(room) <= 5 * (build + 1)
+        return 5 * int(build) + 1 <= int(room) <= 5 * (int(build) + 1)
